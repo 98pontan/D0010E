@@ -14,6 +14,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
+ * The GUI of the game, draws the level and rooms.
  * @author Pontus Eriksson Jirbratt, ponjir-7
  */
 
@@ -21,15 +22,22 @@ public class LevelGUI implements Observer {
 
    private Level lv;
    private Display d;
-   private int levelSizeX = 900;
-   private int levelSizeY = 700;
+   final private int levelSizeX = 900;
+   final private int levelSizeY = 700;
    private RoomToBeDrawn placedRooms[];
 
+   /**
+    * Creates a copy och level and an array of draw room objects the same size as the number of rooms
+    * Initializes the JFrame and adds an observer.
+    * @param level the playing field with all the rooms
+    * @param name the name for the JFrame
+    */
    public LevelGUI(Level level, String name) {
 
       this.lv = level;
       System.out.println("updated Level");
-      //an array with the size of number of rooms
+      //an array of the draw Room class  with the size of number of rooms.
+
       placedRooms = new RoomToBeDrawn[lv.placedRooms.size()];
 
       for(int i = 0; i < placedRooms.length; i++){
@@ -38,7 +46,7 @@ public class LevelGUI implements Observer {
       JFrame frame = new JFrame(name);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      // TODO: You should change 200 to a value
+
       // depending on the size of the level
       d = new Display(lv, levelSizeX, levelSizeY);
 
@@ -51,10 +59,15 @@ public class LevelGUI implements Observer {
       lv.addObserver(this);
    }
 
-
+   /**
+    * each time change is set and observers is notified this method is called and repaints the GUI
+    * @param arg0
+    * @param arg1
+    */
    public void update(Observable arg0, Object arg1) {
       d.repaint();
    }
+
 
    private class Display extends JPanel {
 
@@ -69,7 +82,8 @@ public class LevelGUI implements Observer {
 
       /**
        * Use super on paintComponent to use opaque colors and be more free to make changes on the object
-       * loops through the list of rooms to be drawn
+       * loops through the list of rooms to be drawn and calls drawRoom to draw them.
+       * Draws the player as an gray circle in the current room.
        * @param g
        */
       public void paintComponent(Graphics g) {
@@ -89,7 +103,7 @@ public class LevelGUI implements Observer {
       private class Listener implements KeyListener {
 
          /**
-          * if the arrow keys are used it will call a funtion to make the player change room to the direction of the pressed key
+          * if the arrow keys are used it will call changeRoom in level to make the player change room to the direction of the pressed key
           * @param arg0
           */
          public void keyPressed(KeyEvent arg0) {
@@ -127,9 +141,8 @@ public class LevelGUI implements Observer {
    }
 
    /**
-    * Used for drawing up the room, the doors, paths and numbers.
+    *  Draws the room, the doors, paths and numbers.
     */
-
    public class RoomToBeDrawn{
       JLabel[] doorNumbers;
       private Rectangle doors[];
@@ -138,7 +151,7 @@ public class LevelGUI implements Observer {
 
       /**
        * constructor of the class inizites the variabels, takes in the room object as an argument and the index of which room it is.
-       * if there is a connection a wall then a door will be created, a number of the door will be assigned, the location and font.
+       * if there is a connection a wall then a door will be created, a number of the door will be assigned aswell as the location and font.
        * @param r
        * @param i
        */
@@ -180,7 +193,10 @@ public class LevelGUI implements Observer {
 
       }
 
-
+      /**
+       * Draws the rooms and looks for if its a one direction or both direction paths
+       * @param g
+       */
       void drawRoom(Graphics g){
          g.setColor(room.colorRoom);
          g.fillRect(room.posX, room.posY, room.dx, room.dy);
@@ -197,6 +213,7 @@ public class LevelGUI implements Observer {
                   for (Room r : room.northWall.connections){
                      if (r == room) {
                         oneDirection = false;
+                        break;
                      }
                   }
                   break;
@@ -206,6 +223,7 @@ public class LevelGUI implements Observer {
                   for (Room r : room.southWall.connections){
                      if (r == room) {
                         oneDirection = false;
+                        break;
                      }
                   }
                   break;
@@ -214,6 +232,7 @@ public class LevelGUI implements Observer {
                   for (Room r : room.eastWall.connections){
                      if (r == room) {
                         oneDirection = false;
+                        break;
                      }
                   }
                   break;
@@ -222,6 +241,7 @@ public class LevelGUI implements Observer {
                   for (Room r : room.westWall.connections){
                      if (r == room) {
                         oneDirection = false;
+                        break;
                      }
                   }
                   break;
@@ -236,18 +256,22 @@ public class LevelGUI implements Observer {
 
             }
             else {
-               g.setColor(Color.PINK);
+               g.setColor(Color.BLUE);
                g.drawRect(doors[i].x, doors[i].y, doors[i].width/10, doors[i].height);
                g.drawRect(doors[i].x + doors[i].width, doors[i].y, doors[i].width/10, doors[i].height);
-               //  g.drawLine(doors[i].x + doors[i].width, doors[i].y, doors[i].width, doors[i].height);
+
 
             }
-            drawNumbers(g);
+            drawNumbersAndPaths(g);
          }
 
       }
 
-      void drawNumbers(Graphics g){
+      /**
+       * Draws the door numbers aswell as the paths
+       * @param g
+       */
+      void drawNumbersAndPaths(Graphics g){
          Font comicSans;
          FontMetrics fontMetrics;
 
@@ -268,6 +292,27 @@ public class LevelGUI implements Observer {
             }
             g.drawString(doorNumbers[i].getText(), doorNumbers[i].getX()-1, doorNumbers[i].getY()+1);
          }
+
+         if (room.northWall != null){
+            g.setColor(Color.black);
+            g.drawLine(room.posX + room.dx/2, room.posY, room.northWall.posX + room.northWall.dx/2, room.northWall.posY);
+         }
+
+         if (room.southWall != null){
+            g.setColor(Color.yellow);
+            g.drawLine(room.posX + room.dx/2, room.posY + room.dy, room.southWall.posX + room.southWall.dx/2, room.southWall.posY + room.southWall.dy);
+         }
+
+         if (room.westWall != null){
+            g.setColor(Color.pink);
+            g.drawLine(room.posX, room.posY + room.dy/2, room.westWall.posX, room.westWall.posY + room.westWall.dy/2);
+         }
+
+         if (room.eastWall != null){
+            g.setColor(Color.cyan);
+            g.drawLine(room.posX + room.dx, room.posY + room.dy/2, room.eastWall.posX + (room.eastWall.dx), room.eastWall.posY + room.eastWall.dy/2);
+         }
+
       }
    }
 }

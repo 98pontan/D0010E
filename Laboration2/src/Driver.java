@@ -6,7 +6,14 @@ import java.awt.*;
 
 public class Driver {
 
-
+   /**
+    * initializes an object for each room and give them dimensions and a colour
+    * initializes a playboard object
+    * calls methods in playboard to place the rooms on the playBoard
+    * calls methods to connect the rooms with each other
+    * initializes the GUI object with argument playBoard and a name
+    * @author Pontus Eriksson Jirbratt, ponjir-7
+    */
    public static void run() {
       System.out.println("This is a print-out from the driver.");
       Room r1 = new Room(200, 50, Color.DARK_GRAY);

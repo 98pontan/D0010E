@@ -2,21 +2,29 @@ public class Raise {
    static int recRaiseOneCount;
    static int recRaiseHalfCount;
 
+   /**
+    *
+    * @param args
+    */
    public static void main(String[] args) {
-      for (int i = 1; i <= 4000; i++) {
-         recRaiseOneCount = 0;
-         recRaiseHalfCount = 0;
+      recRaiseOneCount = 0;
+      recRaiseHalfCount = 0;
+
+      for (int i = 1; i <= 100; i++) {
          recRaiseOne(1.0005, i);
          recRaiseHalf(1.0005, i);
-         System.out.println(recRaiseOneCount + ":" +recRaiseHalfCount);
+         //System.out.println(i);
+         System.out.println(recRaiseHalfCount);
+        // System.out.println(recRaiseOneCount + ":" +recRaiseHalfCount);
 
       }
    }
 
    public static double recRaiseHalf(double x, int k) {
-      recRaiseHalfCount++;
       int temporaryInt;
-      int exponent = (int) k/2;
+      int exponent = k/2;
+
+      recRaiseHalfCount++;
 
       if (k == 0) {
          return 1;
@@ -40,5 +48,11 @@ public class Raise {
          return x * recRaiseOne (x, k-1);
       }
    }
+   /**
+    * Task 10
+    * The size of x does not matter in the running time it can be 0 or 2000 the running time is decided by the size of k
+    * N one is exponential n^2
+    * N half is logaritmic nlogn
+    */
 
 }

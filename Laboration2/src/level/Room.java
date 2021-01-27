@@ -2,12 +2,11 @@ package level;
 
 import java.awt.Color;
 /**
+ * A room on the level, have varibles for position x, y and size x, y. Keeps track of where it is connected to other rooms.
+ *  the program use this class to create a new Room object for each room.
  * @author Pontus Eriksson Jirbratt, ponjir-7
  */
-//This uses the class variables, the program uses them to create a new Room object for each room.
 public class Room {
-   private int x;
-   private int y;
    public int dx;
    public int dy;
    public int posX;

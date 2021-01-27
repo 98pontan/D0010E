@@ -5,7 +5,9 @@ import java.util.Observable;
 import java.awt.Rectangle;
 
 /**
- * Places rooms on a level if they have a correct position.
+ * The level of the game board
+ * Keeps track of the rooms and handles when the player changes room.
+ *
  * @author Pontus Eriksson Jirbratt, ponjir-7
  */
 public class Level extends Observable {
@@ -14,7 +16,13 @@ public class Level extends Observable {
    private Room startRoom;
    public Room currentRoom;
 
-
+   /**
+    * looks at the positions of the rooms to make sure they dont collide and if they dont collide add them to an array of room objects.
+    * @param r a room to be placed
+    * @param x size of the room x dimension
+    * @param y size of the room in y dimension
+    * @return
+    */
    public boolean place(Room r, int x, int y)  {
       Rectangle tempRec = new Rectangle(x, y, r.dx, r.dy);
 
@@ -35,23 +43,33 @@ public class Level extends Observable {
             return false;
          }
       }
+
       //sets the positions of the room
       r.posX = x;
       r.posY = y;
       placedRooms.add(r);
       firstLocation(r);
-      System.out.println(placedRooms);
+      //System.out.println(placedRooms);
+
       // flags that the room is placed
       r.flagPlaced();
       System.out.println("Placerat");
       return true;
    }
 
+   /**
+    * saves the start position and keeps track of the players current room.
+    * @param r
+    */
    public void firstLocation(Room r) {
       startRoom = r;
       currentRoom = startRoom;
    }
 
+   /**
+    * Change the players room and notify observers.
+    * @param i
+    */
    public void changeRoom(int i){
       switch (i){
          case 0:
