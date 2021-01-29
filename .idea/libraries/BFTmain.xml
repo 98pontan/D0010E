@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="BFTmain">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Laboration3/BFTmain.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
