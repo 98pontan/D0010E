@@ -21,7 +21,7 @@ public class LifeLength {
 
          case 4:
             task4();
-            break;
+
 
          case 6:
             task6();
@@ -71,8 +71,9 @@ public class LifeLength {
     * 14 = 17
     * 15 = 17
     *
-    * n=1, k = 0
-    * n != 1, if k == x%2 return n/2
+    * Task 5
+    * 1, if n=1
+    * n != 1, if 0 == x%2 return n/2
     * else 3n+1
     */
 

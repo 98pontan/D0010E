@@ -7,21 +7,25 @@ public class Raise {
     * @param args
     */
    public static void main(String[] args) {
-      recRaiseOneCount = 0;
-      recRaiseHalfCount = 0;
-
-      for (int i = 1; i <= 100; i++) {
-         recRaiseOne(1.0005, i);
-         recRaiseHalf(1.0005, i);
+      recRaiseHalf(1, 7023);
+      System.out.println(recRaiseHalfCount);
+      /*
+      for (int i = 1; i <= 10_000; i++) {
+         recRaiseOneCount = 0;
+         recRaiseHalfCount = 0;
+         //recRaiseOne(1.0005, i);
+         //recRaiseHalf(1.0005, i);
          //System.out.println(i);
-         System.out.println(recRaiseHalfCount);
-        // System.out.println(recRaiseOneCount + ":" +recRaiseHalfCount);
+         System.out.println();
+         //System.out.println(recRaiseOneCount + ":" +recRaiseHalfCount);
 
       }
+
+       */
    }
 
    public static double recRaiseHalf(double x, int k) {
-      int temporaryInt;
+      double temporaryInt;
       int exponent = k/2;
 
       recRaiseHalfCount++;
@@ -30,11 +34,11 @@ public class Raise {
          return 1;
       }
       else if(k % 2 == 0) {
-         temporaryInt = (int) recRaiseHalf(x, exponent);
+         temporaryInt = recRaiseHalf(x, exponent);
          return temporaryInt * temporaryInt;
       }
       else {
-         temporaryInt = (int) recRaiseHalf(x, exponent);
+         temporaryInt = recRaiseHalf(x, exponent);
          return temporaryInt * temporaryInt * x;
       }
    }
@@ -51,7 +55,7 @@ public class Raise {
    /**
     * Task 10
     * The size of x does not matter in the running time it can be 0 or 2000 the running time is decided by the size of k
-    * N one is exponential n^2
+    * N one is exponential is konstant
     * N half is logaritmic nlogn
     */
 
