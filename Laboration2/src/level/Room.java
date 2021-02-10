@@ -12,9 +12,9 @@ public class Room {
    public int posX;
    public int posY;
    public Color colorRoom;
-   Room[] connections;
+   public Room[] connections;
 
-   protected boolean placedRoom = false;
+   private boolean placedRoom = false;
 
    public Room northWall = null;
    public Room eastWall = null;
@@ -25,7 +25,7 @@ public class Room {
       this.dx = dx;
       this.dy = dy;
       colorRoom = color;
-      System.out.println("RoomS");
+      System.out.println("Rooms");
       connections = new Room[4];
    }
 

@@ -23,6 +23,7 @@ public class Driver {
       Room r5 = new Room(100, 100, Color.MAGENTA);
       Room r6 = new Room(100, 100, Color.YELLOW);
       Room r7 = new Room(100, 100, Color.PINK);
+      Room r8 = new Room(100, 100, Color.black);
 
       Level playBoard = new Level();
 
@@ -33,7 +34,8 @@ public class Driver {
       playBoard.place(r5, 750, 500);
       playBoard.place(r6, 300, 500);
       playBoard.place(r7, 420, 400);
-      playBoard.firstLocation(r4);
+      playBoard.place(r8, 200, 500);
+      playBoard.firstLocation(r1);
 
       r1.connectNorthTo(r2);
       r1.connectSouthTo(r3);
