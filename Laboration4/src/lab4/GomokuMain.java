@@ -2,6 +2,7 @@ package lab4;
 
 import lab4.client.GomokuClient;
 import lab4.data.GomokuGameState;
+import lab4.gui.GamePanel;
 import lab4.gui.GomokuGUI;
 
 public class GomokuMain
@@ -21,5 +22,6 @@ public class GomokuMain
       client = new GomokuClient(portNumber);
       state = new GomokuGameState(client);
       new GomokuGUI(state, client);
+
    }
 }
