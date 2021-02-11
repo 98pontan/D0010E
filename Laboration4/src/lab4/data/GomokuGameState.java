@@ -45,14 +45,19 @@ public class GomokuGameState extends Observable implements Observer{
     *
     * @return the message string
     */
-   public String getMessageString(){}
+   public String getMessageString()
+   {
+      return message;
+   }
 
    /**
     * Returns the game grid
     *
     * @return the game grid
     */
-   public GameGrid getGameGrid(){}
+   public GameGrid getGameGrid(){
+      return gameGrid;
+   }
 
    /**
     * This player makes a move at a specified location

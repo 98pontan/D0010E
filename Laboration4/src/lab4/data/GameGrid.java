@@ -9,6 +9,8 @@ import java.util.Observable;
 public class GameGrid extends Observable{
 
    int[][] gameGrid; //might be private check later
+   private int xLastPos;
+   private int yLastPos;
    /**
     * Constructor
     *
@@ -32,7 +34,7 @@ public class GameGrid extends Observable{
     * @return the value of the specified location
     */
    public int getLocation(int x, int y){
-      return 1;
+      return gameGrid[x][y];
    }
 
    /**
@@ -52,6 +54,9 @@ public class GameGrid extends Observable{
     */
    public boolean move(int x, int y, int player)
    {
+      xLastPos = x;
+      yLastPos = y;
+
       if (player == 1)
          return false;
 
@@ -81,7 +86,72 @@ public class GameGrid extends Observable{
     */
    public boolean isWinner(int player)
    {
-         
+      boolean winner = true;
+
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos][yLastPos+i] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      winner = true;
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos][yLastPos-i] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      winner = true;
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos+i][yLastPos] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      winner = true;
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos-i][yLastPos] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      winner = true;
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos+i][yLastPos+i] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      winner = true;
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos+i][yLastPos-i] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      winner = true;
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos-i][yLastPos+i] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      winner = true;
+      for (int i = 0; i < 5; i++){
+         if(gameGrid[xLastPos-i][yLastPos-i] != player)
+            winner = false;
+      }
+      if (winner)
+         return winner;
+
+      return false;
    }
 
 
